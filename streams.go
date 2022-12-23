@@ -43,6 +43,15 @@ func All[T any](data []T, f func(T) bool) bool {
 	return true
 }
 
+func None[T any](data []T, f func(T) bool) bool {
+	for _, e := range data {
+		if f(e) {
+			return false
+		}
+	}
+	return true
+}
+
 func First[T any](data []T, f func(T) (bool, error)) (*T, error) {
 	for _, e := range data {
 		r, err := f(e)
