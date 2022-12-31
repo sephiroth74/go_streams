@@ -1,7 +1,5 @@
 package streams
 
-import "errors"
-
 func Map[I any, O any](data []I, f func(I) (O, error)) ([]O, error) {
 	mapped := make([]O, len(data))
 	for i, e := range data {
@@ -63,7 +61,7 @@ func First[T any](data []T, f func(T) (bool, error)) (*T, error) {
 			return &e, nil
 		}
 	}
-	return nil, errors.New("not found")
+	return nil, ErrNotFound
 }
 
 func FirstNotNull[T any](data []T, f func(T) bool) *T {
