@@ -13,13 +13,9 @@ func Any[K comparable, T any](data map[K]T, f func(K, T) bool) bool {
 	return false
 }
 
-func First[K comparable, T any](data map[K]T, f func(K, T) (bool, error)) (*K, error) {
+func First[K comparable, T any](data map[K]T, f func(K, T) bool) (*K, error) {
 	for k, v := range data {
-		r, err := f(k, v)
-		if err != nil {
-			return nil, err
-		}
-
+		r := f(k, v)
 		if r {
 			return &k, nil
 		}

@@ -1,15 +1,11 @@
 package streams
 
-func Map[I any, O any](data []I, f func(I) (O, error)) ([]O, error) {
+func Map[I any, O any](data []I, f func(I) O) []O {
 	mapped := make([]O, len(data))
 	for i, e := range data {
-		m, err := f(e)
-		if err != nil {
-			return nil, err
-		}
-		mapped[i] = m
+		mapped[i] = f(e)
 	}
-	return mapped, nil
+	return mapped
 }
 
 func MapNotNull[I any, O any](data []I, f func(I) (O, error)) []O {
@@ -50,14 +46,9 @@ func None[T any](data []T, f func(T) bool) bool {
 	return true
 }
 
-func First[T any](data []T, f func(T) (bool, error)) (*T, error) {
+func First[T any](data []T, f func(T) bool) (*T, error) {
 	for _, e := range data {
-		r, err := f(e)
-		if err != nil {
-			return nil, err
-		}
-
-		if r {
+		if f(e) {
 			return &e, nil
 		}
 	}

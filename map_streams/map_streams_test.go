@@ -30,8 +30,8 @@ func TestFirst(t *testing.T) {
 		"two": "this is two",
 	}
 
-	key, err := First(m, func(k string, v string) (bool, error) {
-		return k == "one", nil
+	key, err := First(m, func(k string, v string) bool {
+		return k == "one"
 	})
 
 	assert.Nil(t, err)
