@@ -35,3 +35,11 @@ func FirstNotNull[K comparable, T any](data map[K]T, f func(K, T) bool) *K {
 	}
 	return nil
 }
+
+func Map[K comparable, T any, O any](data map[K]T, f func(K, T) O) []O {
+	var result []O
+	for k, v := range data {
+		result = append(result, f(k, v))
+	}
+	return result
+}
