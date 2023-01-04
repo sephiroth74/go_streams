@@ -63,3 +63,11 @@ func FirstNotNull[T any](data []T, f func(T) bool) *T {
 	}
 	return nil
 }
+
+func SumOf[T any](data []T, f func(T) int) int {
+	total := 0
+	for _, e := range data {
+		total += f(e)
+	}
+	return total
+}
