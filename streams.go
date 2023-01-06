@@ -28,6 +28,15 @@ func Any[T any](data []T, f func(T) bool) bool {
 	return false
 }
 
+func IndexOf[T any](data []T, f func(T) bool) int {
+	for index, e := range data {
+		if f(e) {
+			return index
+		}
+	}
+	return -1
+}
+
 func All[T any](data []T, f func(T) bool) bool {
 	for _, e := range data {
 		if !f(e) {
