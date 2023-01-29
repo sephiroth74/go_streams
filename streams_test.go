@@ -34,3 +34,13 @@ func TestAny(t *testing.T) {
 	})
 	assert.False(t, result)
 }
+
+func TestDistinct(t *testing.T) {
+	options := []string{"Hello", "World", "Another", "Hello", "World", "Another", "Test", "Another"}
+	result := streams.Distinct(options)
+	assert.Equal(t, 4, len(result))
+	assert.Equal(t, "Hello", result[0])
+	assert.Equal(t, "World", result[1])
+	assert.Equal(t, "Another", result[2])
+	assert.Equal(t, "Test", result[3])
+}

@@ -80,3 +80,16 @@ func SumOf[T any](data []T, f func(T) int) int {
 	}
 	return total
 }
+
+// Unique returns the unique elements of data.
+func Distinct[E comparable](src []E) []E {
+	keys := make(map[E]bool)
+	list := []E{}
+	for _, entry := range src {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
+}
