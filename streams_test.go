@@ -44,3 +44,15 @@ func TestDistinct(t *testing.T) {
 	assert.Equal(t, "Another", result[2])
 	assert.Equal(t, "Test", result[3])
 }
+
+func TestFilter(t *testing.T) {
+	options := []string{"Hello", "World", "", "Hello", "World", "", "", ""}
+	result := streams.Filter(options, func(i string) bool {
+		return len(i) > 0
+	})
+	assert.Equal(t, 4, len(result))
+	assert.Equal(t, "Hello", result[0])
+	assert.Equal(t, "World", result[1])
+	assert.Equal(t, "Hello", result[2])
+	assert.Equal(t, "World", result[3])
+}

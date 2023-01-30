@@ -1,5 +1,15 @@
 package streams
 
+func Filter[I any](data []I, f func(I) bool) []I {
+	mapped := []I{}
+	for _, e := range data {
+		if f(e) {
+			mapped = append(mapped, e)
+		}
+	}
+	return mapped
+}
+
 func Map[I any, O any](data []I, f func(I) O) []O {
 	mapped := make([]O, len(data))
 	for i, e := range data {
